@@ -13,6 +13,7 @@ Esta aplicación es una evolución del proyecto de la Evaluación 1. Se ha imple
 
 ### 🎥 Video Demostrativo
 
+Puedes revisar una demostración breve del funcionamiento en el siguiente enlace:
 https://youtube.com/shorts/7sRVjTlarV0?feature=share
 
 ## 🚀 Tecnologías Utilizadas
@@ -33,7 +34,7 @@ https://youtube.com/shorts/7sRVjTlarV0?feature=share
 - Credenciales de prueba:
   - **Email**: (cualquier email válido con @)
   - **Contraseña**: `1234`
-- Gestión de sesión global con `UserContext`.
+- Gestión de sesión global con `UserContext`, permitiendo controlar el acceso a las pantallas internas.
 
 ### 2. Gestión de Tareas (TODO List)
 - **Crear Tareas**: Formulario para agregar nuevas tareas con título.
@@ -59,7 +60,7 @@ https://youtube.com/shorts/7sRVjTlarV0?feature=share
 
 1.  **Clonar el repositorio**:
     ```bash
-    git clone <https://github.com/CamiloPrzG/Ev2SalasPerez>
+    git clone https://github.com/CamiloPrzG/Ev2SalasPerez
     cd Ev2_Salas_Perez
     ```
 
@@ -76,6 +77,7 @@ https://youtube.com/shorts/7sRVjTlarV0?feature=share
 4.  **Probar**:
     - Escanear el código QR con la app **Expo Go** (Android/iOS).
 
+### Comandos adicionales
 # iOS
 npm run ios
 
