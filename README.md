@@ -13,7 +13,7 @@ Esta aplicación es una evolución del proyecto de la Evaluación 1. Se ha imple
 
 ### 🎥 Video Demostrativo
 
-Puedes revisar una demostración breve del funcionamiento en el siguiente enlace:
+Puede revisar una demostración breve del funcionamiento en el siguiente enlace:
 https://youtube.com/shorts/7sRVjTlarV0?feature=share
 
 ## 🚀 Tecnologías Utilizadas
