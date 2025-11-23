@@ -59,7 +59,7 @@ https://youtube.com/shorts/7sRVjTlarV0?feature=share
 
 1.  **Clonar el repositorio**:
     ```bash
-    git clone <URL_DEL_REPOSITORIO>
+    git clone <https://github.com/CamiloPrzG/Ev2SalasPerez>
     cd Ev2_Salas_Perez
     ```
 
