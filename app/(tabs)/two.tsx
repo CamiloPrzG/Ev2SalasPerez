@@ -3,24 +3,20 @@ import { useRouter } from 'expo-router';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function ProfileScreen() {
-  const { userEmail, setUserEmail } = useUser();
+  const { user, logout } = useUser();
   const router = useRouter();
-  const displayEmail = userEmail || 'No email disponible';
+  const displayEmail = user || 'No usuario disponible';
 
-  const handleLogout = () => {
-    setUserEmail('');
-    // Intentamos limpiar el historial de navegación
-    if (router.canDismiss()) {
-      router.dismissAll();
-    }
-    // Forzamos el reemplazo de la ruta actual por el login
-    router.replace('/');
+  const handleLogout = async () => {
+    await logout();
+    // El contexto ya maneja la redirección, pero por seguridad:
+    // router.replace('/'); 
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Perfil</Text>
-      <Text style={styles.label}>Email:</Text>
+      <Text style={styles.label}>Usuario:</Text>
       <Text style={styles.email}>{displayEmail}</Text>
 
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>

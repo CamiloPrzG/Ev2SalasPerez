@@ -1,11 +1,12 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter, useSegments } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { UserProvider } from '@/contexts/UserContext';
+import { UserProvider, useUser } from '@/contexts/UserContext';
+import { ActivityIndicator, View } from 'react-native';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,10 +48,46 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <UserProvider>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      </Stack>
+      <AuthGate />
     </UserProvider>
+  );
+}
+
+function AuthGate() {
+  const { user, isLoading } = useUser();
+  const segments = useSegments();
+  const router = useRouter();
+
+  // Nota: En Expo Router, la ruta raíz '/' (index) puede venir como [] en useSegments().
+  const currentSegment = segments[0] as string | undefined;
+  const isPublicRoute = !currentSegment || currentSegment === 'index' || currentSegment === 'register';
+  const segmentsKey = segments.join('/');
+
+  useEffect(() => {
+    // Navegación centralizada (evita loops por redirects múltiples en screens/layouts)
+    if (isLoading) return;
+    if (!user && !isPublicRoute) {
+      router.replace('/');
+      return;
+    }
+    if (user && isPublicRoute) {
+      router.replace('/(tabs)');
+    }
+  }, [user, isLoading, isPublicRoute, segmentsKey]);
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="register" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }
