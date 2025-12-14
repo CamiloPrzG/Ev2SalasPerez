@@ -55,11 +55,6 @@ export function useTodoManager() {
 
     const addTask = async (title: string, imageUri?: string, location?: { latitude: number; longitude: number }) => {
         try {
-            // No ponemos loading global para no bloquear toda la UI, o sí?
-            // Mejor manejar loading local o dejar que la UI responda.
-            // El requerimiento pide "estados de carga".
-            // Usaremos el loading del hook o retornaremos una promesa.
-
             const newApiTask = await api.createTask(title, imageUri, location);
             const newTask = mapApiTaskToTask(newApiTask);
             setTasks(prev => [...prev, newTask]);
@@ -73,7 +68,7 @@ export function useTodoManager() {
 
     const deleteTask = async (id: string) => {
         try {
-            // Optimistic update
+            // Actualización optimista (borramos de la lista antes de confirmar con el server)
             const previousTasks = [...tasks];
             setTasks(prev => prev.filter(t => t.id !== id));
 
@@ -90,7 +85,7 @@ export function useTodoManager() {
         if (!task) return;
 
         try {
-            // Optimistic update
+            // Actualización optimista
             setTasks(prev => prev.map(t =>
                 t.id === id ? { ...t, isCompleted: !t.isCompleted } : t
             ));

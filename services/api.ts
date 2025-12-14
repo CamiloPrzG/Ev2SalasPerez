@@ -99,7 +99,7 @@ export const api = {
     async createTask(title: string, imageUri?: string, location?: { latitude: number; longitude: number }): Promise<ApiTask> {
         let finalPhotoUri = undefined;
 
-        // 1. Si hay imagen, subirla primero al endpoint /images
+        // 1. Si hay imagen, la subimos primero
         if (imageUri) {
             const formData = new FormData();
             const filename = imageUri.split('/').pop() || 'photo.jpg';
@@ -108,7 +108,7 @@ export const api = {
 
             formData.append('image', { uri: imageUri, name: filename, type } as any);
 
-            const headers = await getHeaders(true); // true = multipart
+            const headers = await getHeaders(true);
             const uploadResponse = await fetch(`${API_URL}/images`, {
                 method: 'POST',
                 headers,
@@ -124,12 +124,12 @@ export const api = {
             finalPhotoUri = uploadData.data.url;
         }
 
-        // 2. Crear la tarea enviando JSON (con o sin foto)
+        // 2. Crear la tarea con los datos (incluyendo la URL de la foto si existe)
         const headers = await getHeaders();
         const body = JSON.stringify({
             title,
             location,
-            photoUri: finalPhotoUri, // Campo correcto según GET
+            photoUri: finalPhotoUri,
         });
 
         const response = await fetch(`${API_URL}/todos`, {

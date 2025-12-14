@@ -9,16 +9,16 @@ import { UserProvider, useUser } from '@/contexts/UserContext';
 import { ActivityIndicator, View } from 'react-native';
 
 export {
-  // Catch any errors thrown by the Layout component.
+  // Captura errores lanzados por el Layout
   ErrorBoundary
 } from 'expo-router';
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
+  // Asegura que al recargar en `/modal` se mantenga el botón de atrás
   initialRouteName: 'index',
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// Previene que la pantalla de carga se oculte antes de cargar los recursos
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -27,7 +27,7 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  // Expo Router usa Error Boundaries para capturar errores en la navegación
   useEffect(() => {
     if (error) throw error;
   }, [error]);

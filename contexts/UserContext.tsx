@@ -79,8 +79,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       await AsyncStorage.removeItem('auth_user');
       setToken(null);
       setUser(null);
-      // No navegamos manualmente, dejamos que el layout protegido redirija
-      // o que el usuario sea redirigido por el cambio de estado
+      // La redirección ocurre automáticamente gracias al AuthGate en el layout
     } catch (error) {
       console.error('Error en logout:', error);
     }
